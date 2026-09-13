@@ -12,16 +12,13 @@ import { buildWord, fontsReady } from './scene/type.js';
 import { Furniture } from './scene/furniture.js';
 import { sample, letterOrder, CUES, T } from './scene/timeline.js';
 import { damp, clamp } from './lib/ease.js';
-import { initUniverse } from './scene2/boot2.js';
-import { initChrono } from './scene3/boot3.js';
-import { initGallery } from './scene4/boot4.js';
-import { initFinale } from './scene6/boot6.js';
+// Later scenes are loaded on demand as they approach the viewport.
 
 // a cinematic page manages its own positions; the browser restoring an old
 // scroll offset mid-boot yanks the visitor (and any scripted anchor) around
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
-const MEDIA = 'public/media/';
+const MEDIA = 'media/';
 const MIN_BLACK = 620;          // the darkness must be felt, even on a fast line
 
 const root = document.documentElement;
@@ -69,8 +66,8 @@ async function main() {
   await Promise.all([
     fontsReady().then(tick),
     app.stage.loadTextures({
-      grunge: 'public/tex/grunge.png',
-      grain: 'public/tex/grain.png',
+      grunge: 'tex/grunge.png',
+      grain: 'tex/grain.png',
     }).then(tick),
   ]);
 
@@ -99,19 +96,79 @@ async function main() {
 
   const playing = await app.clips.hero.play();
 
-  // the later scenes build while the hero plays, so scrolling into them is
-  // instant; each one runs only while it is actually on screen
-  initUniverse().then((u) => { app.universe = u; })
-    .catch((e) => console.warn('[gireesh] universe unavailable:', e.message));
-  initChrono().then((c) => { app.chrono = c; })
-    .catch((e) => console.warn('[gireesh] chrono unavailable:', e.message));
-  initGallery().then((g) => { app.gallery = g; })
-    .catch((e) => console.warn('[gireesh] gallery unavailable:', e.message));
-  initFinale().then((f) => { app.finale = f; })
-    .catch((e) => console.warn('[gireesh] finale unavailable:', e.message));
+  // Later scenes are imported only as they approach the viewport.
+  // Their own boot modules still manage visibility and render lifecycles.
+  lazyScene('#universe', () =>
+    import('./scene2/boot2.js').then((m) => m.initUniverse())
+  ).then((u) => { app.universe = u; });
+
+  lazyScene('#chrono', () =>
+    import('./scene3/boot3.js').then((m) => m.initChrono())
+  ).then((c) => { app.chrono = c; });
+
+  lazyScene('#gallery', () =>
+    import('./scene4/boot4.js').then((m) => m.initGallery())
+  ).then((g) => { app.gallery = g; });
+
+  lazyScene('#fin', () =>
+    import('./scene6/boot6.js').then((m) => m.initFinale())
+  ).then((f) => { app.finale = f; });
 
   if (!playing) return awaitGesture();
   begin();
+}
+
+
+function lazyScene(selector, loader) {
+  const section = document.querySelector(selector);
+
+  // This promise resolves only when the scene is actually started.
+  // Calling .then() must NOT itself trigger the import.
+  let resolveStart;
+  let rejectStart;
+
+  const ready = new Promise((resolve, reject) => {
+    resolveStart = resolve;
+    rejectStart = reject;
+  });
+
+  let started = false;
+
+  const start = () => {
+    if (started) return;
+    started = true;
+
+    Promise.resolve()
+      .then(loader)
+      .then(resolveStart)
+      .catch((e) => {
+        console.warn(`[roni] ${selector} unavailable:`, e.message);
+        rejectStart(e);
+      });
+  };
+
+  if (!section || !('IntersectionObserver' in window)) {
+    // Graceful fallback for browsers without IntersectionObserver.
+    start();
+    return ready;
+  }
+
+  const io = new IntersectionObserver(
+    (entries) => {
+      if (!entries.some((entry) => entry.isIntersecting)) return;
+      io.disconnect();
+      start();
+    },
+    {
+      // Begin loading before the visitor reaches the section.
+      rootMargin: '120% 0px',
+      threshold: 0,
+    }
+  );
+
+  io.observe(section);
+
+  return ready;
 }
 
 function begin() {
@@ -233,13 +290,13 @@ function frame(now) {
 // --------------------------------------------------------------------------
 
 function degrade(reason) {
-  console.warn('[gireesh] falling back:', reason);
+  console.warn('[roni] falling back:', reason);
   root.classList.remove('is-booting');
   root.classList.add('is-fallback');
   boot.classList.add('is-done');
   for (const [, name] of CUES) root.classList.add(`is-${name}`);
   document.querySelector('.stage-wrap').insertAdjacentHTML('afterbegin',
-    '<div class="fallback"><p>GIREESH</p>'
+    '<div class="fallback"><p>RONI HALDER</p>'
     + '<small>Welcome to my world</small></div>');
 }
 
@@ -259,21 +316,112 @@ function debounce(fn, ms) {
 // mobile menu
 const burger = document.getElementById('burger');
 const menu = document.getElementById('menu');
-menu?.querySelectorAll('a').forEach((a, i) => a.style.setProperty('--i', i));
+const menuLinks = menu?.querySelectorAll('a') ?? [];
+let menuReturnFocus = null;
+
+menuLinks.forEach((a, i) => a.style.setProperty('--i', i));
+
 function setMenu(open) {
+  if (!burger || !menu) return;
+
   burger.setAttribute('aria-expanded', String(open));
   root.classList.toggle('is-menu', open);
-  if (open) menu.hidden = false;
-  else setTimeout(() => { if (!root.classList.contains('is-menu')) menu.hidden = true; }, 500);
+
+  if (open) {
+    menu.hidden = false;
+    menuReturnFocus = document.activeElement;
+
+    requestAnimationFrame(() => {
+      menu.querySelector('a')?.focus();
+    });
+    return;
+  }
+
+  setTimeout(() => {
+    if (!root.classList.contains('is-menu')) menu.hidden = true;
+  }, 500);
+
+  requestAnimationFrame(() => {
+    const target =
+      menuReturnFocus instanceof HTMLElement ? menuReturnFocus : burger;
+    target?.focus();
+  });
 }
-burger?.addEventListener('click', () =>
-  setMenu(burger.getAttribute('aria-expanded') !== 'true'));
+
+burger?.addEventListener('click', () => {
+  const open = burger.getAttribute('aria-expanded') !== 'true';
+  setMenu(open);
+});
+
 menu?.addEventListener('click', (e) => {
   if (e.target.closest('a')) setMenu(false);
 });
+
 window.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && root.classList.contains('is-menu')) setMenu(false);
+  if (e.key !== 'Escape' || !root.classList.contains('is-menu')) return;
+
+  e.preventDefault();
+  setMenu(false);
 });
+
+// Keep both desktop and mobile navs synchronized with the section in view.
+const navLinks = [...document.querySelectorAll('[data-nav][href^="#"]')];
+const navTargets = [
+  { id: 'top', ratio: 0 },
+  { id: 'universe', ratio: 0 },
+  { id: 'chrono', ratio: 0 },
+  { id: 'gallery', ratio: 0 },
+  { id: 'fin', ratio: 0 },
+];
+
+function setActiveNav(id) {
+  navLinks.forEach((link) => {
+    const active = link.getAttribute('href') === `#${id}`;
+    link.classList.toggle('is-active', active);
+    if (active) link.setAttribute('aria-current', 'page');
+    else link.removeAttribute('aria-current');
+  });
+}
+
+function updateActiveNav() {
+  let best = navTargets[0];
+
+  for (const target of navTargets) {
+    const el = document.getElementById(target.id);
+    if (!el) continue;
+
+    const rect = el.getBoundingClientRect();
+    const visible = Math.max(
+      0,
+      Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0)
+    );
+
+    const ratio = visible / Math.max(1, Math.min(rect.height, window.innerHeight));
+
+    if (ratio > best.ratio) {
+      best = { id: target.id, ratio };
+    }
+  }
+
+  // The hero owns the home state until another real section has meaningful
+  // viewport presence.
+  if (best.id === 'top' || best.ratio >= 0.18) setActiveNav(best.id);
+}
+
+let navTicking = false;
+function scheduleActiveNav() {
+  if (navTicking) return;
+  navTicking = true;
+
+  requestAnimationFrame(() => {
+    navTicking = false;
+    updateActiveNav();
+  });
+}
+
+window.addEventListener('scroll', scheduleActiveNav, { passive: true });
+window.addEventListener('resize', scheduleActiveNav, { passive: true });
+window.addEventListener('load', updateActiveNav);
 
 // The hero is position:fixed behind the flow, so once scene two covers it there
 // is nothing to see - stop decoding its video rather than burning battery on

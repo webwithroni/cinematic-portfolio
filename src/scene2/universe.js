@@ -78,15 +78,15 @@ export class Universe {
   async load() {
     const gl = this.gl;
     const [grain, fig] = await Promise.all([
-      loadImage('public/tex/grain.png'),
-      loadImage('public/tools/figure.png'),
+      loadImage('tex/grain.png'),
+      loadImage('tools/figure.png'),
     ]);
     upload(gl, this.tex.grain, grain);
     upload(gl, this.tex.figure, fig);
     this.figureAspect = fig.width / fig.height;
 
     const imgs = await Promise.all(
-      TOOLS.map((n) => loadImage(`public/tools/${n}.png`).catch(() => null)));
+      TOOLS.map((n) => loadImage(`tools/${n}.png`).catch(() => null)));
     TOOLS.forEach((n, i) => {
       if (!imgs[i]) return;
       const t = texture(gl);

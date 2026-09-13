@@ -1,5 +1,5 @@
 """
-matte.py - offline background removal for the GIREESH hero videos.
+matte.py - offline background removal for the RONI HALDER hero videos.
 
 Studio white-cyclorama footage -> per-pixel alpha matte -> "packed alpha" video
 (colour on the left half, matte on the right half of a double-width frame).

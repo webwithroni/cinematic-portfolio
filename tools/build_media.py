@@ -59,7 +59,7 @@ def verify(packed_mp4, w):
 
 
 def build_grunge():
-    """Lift the distressed surface out of the supplied GIREESH artwork.
+    """Lift the distressed surface out of the supplied hero artwork.
 
     The letters are rendered live as real type so they stay razor sharp at any
     size, but the SURFACE has to be the one from the reference art, so it is

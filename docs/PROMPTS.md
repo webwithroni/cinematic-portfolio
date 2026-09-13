@@ -17,11 +17,11 @@ root), and every brief carried the same standing rules:
 
 ## Scene 1 — Cinematic hero opening
 Black screen → the walking man (video 1, white backdrop removed, no visible
-rectangle) enters centre → the giant red distressed GIREESH rises from below,
+rectangle) enters centre → the giant red distressed RONI HALDER rises from below,
 dissolving and sharpening in → WELCOME TO MY WORLD drops in front → chips,
 arrows and dots fly in → header reveals → settled hero with subtle motion and
 mouse parallax. Mid-build corrections: videos 2 & 3 removed entirely; the
-top-left dot cluster removed; final layering fixed as background → GIREESH →
+top-left dot cluster removed; final layering fixed as background → RONI HALDER →
 walking person IN FRONT → labels → header, with the animated reveal kept.
 
 ## Scene 2 — The creative universe

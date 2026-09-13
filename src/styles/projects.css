@@ -195,7 +195,7 @@
 
 .gallery.is-fallback #galleryStage { display: none; }
 .gallery.is-fallback .gallery__pin {
-  background: #000 url('../../public/projects/plate.jpg') center / cover no-repeat;
+  background: #000 url('/projects/plate.jpg') center / cover no-repeat;
 }
 .gallery.is-set .g-card,
 .gallery.is-set .gallery__person { opacity: 1; }

@@ -118,7 +118,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: #000 url('../../public/media/universe.jpg') center / cover no-repeat;
+  background: #000 url('/media/universe.jpg') center / cover no-repeat;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -33,9 +33,9 @@ export class Finale {
 
   async load() {
     const [plate, man, grain] = await Promise.all([
-      loadImage('public/fin/plate.jpg'),
-      loadImage('public/fin/man.png'),
-      loadImage('public/tex/grain.png'),
+      loadImage('fin/plate.jpg'),
+      loadImage('fin/man.png'),
+      loadImage('tex/grain.png'),
     ]);
     upload(this.back.gl, this.texB.plate, plate);
     upload(this.back.gl, this.texB.grain, grain);

@@ -1,5 +1,5 @@
 /* ==========================================================================
-   GIREESH — hero
+   RONI HALDER — hero
    The artwork itself (background, wordmark, the three people) is drawn on the
    WebGL canvas. Everything in this file is the furniture layered over it:
    header, welcome strip, chips, arrows, dot grids.
@@ -7,32 +7,32 @@
 
 @font-face {
   font-family: 'Anton';
-  src: url('../../public/fonts/anton-400.woff2') format('woff2');
+  src: url('/fonts/anton-400.woff2') format('woff2');
   font-weight: 400; font-style: normal; font-display: block;
 }
 @font-face {
   font-family: 'Oswald';
-  src: url('../../public/fonts/oswald-300.woff2') format('woff2');
+  src: url('/fonts/oswald-300.woff2') format('woff2');
   font-weight: 300; font-style: normal; font-display: swap;
 }
 @font-face {
   font-family: 'Oswald';
-  src: url('../../public/fonts/oswald-400.woff2') format('woff2');
+  src: url('/fonts/oswald-400.woff2') format('woff2');
   font-weight: 400; font-style: normal; font-display: swap;
 }
 @font-face {
   font-family: 'Oswald';
-  src: url('../../public/fonts/oswald-500.woff2') format('woff2');
+  src: url('/fonts/oswald-500.woff2') format('woff2');
   font-weight: 500; font-style: normal; font-display: swap;
 }
 @font-face {
   font-family: 'Oswald';
-  src: url('../../public/fonts/oswald-600.woff2') format('woff2');
+  src: url('/fonts/oswald-600.woff2') format('woff2');
   font-weight: 600; font-style: normal; font-display: swap;
 }
 @font-face {
   font-family: 'Oswald';
-  src: url('../../public/fonts/oswald-700.woff2') format('woff2');
+  src: url('/fonts/oswald-700.woff2') format('woff2');
   font-weight: 700; font-style: normal; font-display: swap;
 }
 
@@ -141,7 +141,7 @@ html.is-booting .hdr { opacity: 0; }
      text fill is transparent, so `color` alone paints nothing and the mark
      comes out as bare grey texture. */
   background-color: var(--ink);
-  background-image: url('../../public/tex/grunge.png');
+  background-image: url('/tex/grunge.png');
   background-size: 260px;
   background-blend-mode: multiply;
   -webkit-background-clip: text;
@@ -413,7 +413,7 @@ html.is-booting .hdr { opacity: 0; }
   line-height: 1.06;
   color: var(--ink);
   background-color: var(--ink);
-  background-image: url('../../public/tex/grunge.png');
+  background-image: url('/tex/grunge.png');
   background-size: 300px;
   background-blend-mode: multiply;
   -webkit-background-clip: text;

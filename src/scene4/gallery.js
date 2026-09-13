@@ -27,8 +27,8 @@ export class Gallery {
 
   async load() {
     const [plate, grain] = await Promise.all([
-      loadImage('public/projects/plate.jpg'),
-      loadImage('public/tex/grain.png'),
+      loadImage('projects/plate.jpg'),
+      loadImage('tex/grain.png'),
     ]);
     upload(this.gl, this.tex.plate, plate);
     upload(this.gl, this.tex.grain, grain);
