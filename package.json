@@ -1,0 +1,17 @@
+{
+  "name": "cinematic-portfolio",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "check": "npm run check:js && npm run check:json",
+    "check:js": "node tools/check-js.mjs",
+    "check:json": "node tools/check-json.mjs"
+  },
+  "devDependencies": {
+    "vite": "latest"
+  }
+}
