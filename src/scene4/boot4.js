@@ -55,7 +55,7 @@ export async function initGallery() {
     el.style.zIndex = String(10 + Math.round((1 - c.depth) * 20));
     el.style.setProperty('--i', String(i));   // float dephasing
     el.innerHTML = `<span class="g-card__in">`
-      + `<img src="public/projects/${c.id}.png" alt="" `
+      + `<img src="projects/${c.id}.png" alt="" `
       + `draggable="false" loading="eager" decoding="async"></span>`;
     deck.appendChild(el);
     return el;
@@ -201,6 +201,10 @@ export async function initGallery() {
     }
     if (s.live) section.classList.add('is-live');
 
+    if (reduced) {
+      state.running = false;
+      return;
+    }
     state.raf = requestAnimationFrame(frame);
   };
 

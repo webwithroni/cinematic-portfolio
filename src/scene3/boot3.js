@@ -51,7 +51,7 @@ export async function initChrono() {
     el.setAttribute('aria-label', `${y.year} — ${y.key}`);
     el.innerHTML =
       `<span class="yr__frame">`
-      + `<img class="yr__img" src="public/years/${y.year}.jpg" alt="" `
+      + `<img class="yr__img" src="years/${y.year}.jpg" alt="" `
       + `loading="lazy" decoding="async">`
       + `<span class="yr__body">`
       + `<span class="yr__year">${y.year}</span>`
@@ -170,6 +170,10 @@ export async function initChrono() {
         labels.forEach((el, i) => el.classList.toggle('is-active', i === chrono.active));
         section.dataset.year = String(YEARS[chrono.active].year);
       }
+    }
+    if (reduced) {
+      state.running = false;
+      return;
     }
     state.raf = requestAnimationFrame(frame);
   };

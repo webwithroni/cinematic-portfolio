@@ -24,7 +24,7 @@ export async function initFinale() {
 
   const fin = new Finale(back, glB, front, glF);
   try {
-    const meta = await fetch('public/fin/fin.json').then((r) => r.json());
+    const meta = await fetch('fin/fin.json').then((r) => r.json());
     fin.manBox = meta.man;
   } catch { /* the default box matches the shipped extraction */ }
   await fin.load();
@@ -47,7 +47,7 @@ export async function initFinale() {
     // use; while the image is absent each miss logs one benign 404
     const candidates = [
       'footer%202nd%20image.jpg',
-      'public/fin/frame2.jpg',
+      'fin/frame2.jpg',
       'Footer%20image%202.jpg',
     ];
     (function tryNext(i) {
@@ -125,6 +125,10 @@ export async function initFinale() {
 
     if (s.caps > 0) section.classList.add('is-caps');
     if (s.bar > 0) section.classList.add('is-bar');
+    if (reduced) {
+      state.running = false;
+      return;
+    }
     state.raf = requestAnimationFrame(frame);
   };
 

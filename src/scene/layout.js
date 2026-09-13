@@ -2,7 +2,7 @@
 //
 // Every constant here was measured off the supplied hero artwork rather than
 // eyeballed, so the live page keeps the reference's proportions exactly:
-//   GIREESH ink box   x 3.31% .. 96.75%,  cap top 27.00%, baseline 80.22%
+//   RONI HALDER wordmark ink box   x 3.31% .. 96.75%,  cap top 27.00%, baseline 80.22%
 //   WELCOME strip     centred, y 20.44%
 //   LEGEND chip       x 88.12%, y 26.78%, 10.38% x 4.22%
 //   ARTIST chip       x  1.50%, y 68.78%, 15.00% x 3.67%

@@ -3,13 +3,26 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>GIREESH — Artist · Creative · Storyteller</title>
-<meta name="description" content="Welcome to my world. Portfolio of Gireesh — artist, creative, storyteller.">
+<title>RONI HALDER — Designer · Creative · Storyteller</title>
+<meta name="description" content="Welcome to my world. Portfolio of Roni Halder — designer, creative, storyteller.">
 <meta name="theme-color" content="#000000">
+<meta name="author" content="Roni Halder">
+<meta name="robots" content="index, follow">
+<meta name="color-scheme" content="dark">
 
-<link rel="preload" href="public/fonts/anton-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="public/fonts/oswald-500.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="public/fonts/oswald-700.woff2" as="font" type="font/woff2" crossorigin>
+<meta property="og:type" content="website">
+<meta property="og:title" content="Roni Halder — Cinematic Portfolio">
+<meta property="og:description" content="Roni Halder — Designer, Creative, Storyteller. A cinematic portfolio of selected work, ideas and experiments.">
+<meta property="og:image" content="/media/hero.jpg">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Roni Halder — Cinematic Portfolio">
+<meta name="twitter:description" content="Roni Halder — Designer, Creative, Storyteller.">
+<meta name="twitter:image" content="/media/hero.jpg">
+
+<link rel="preload" href="fonts/anton-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/oswald-500.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/oswald-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="src/styles/app.css">
 <link rel="stylesheet" href="src/styles/universe.css">
 <link rel="stylesheet" href="src/styles/chrono.css">
@@ -20,9 +33,9 @@
 
 <!-- the real heading, for search engines and screen readers; the visible
      wordmark is drawn on the canvas so video can be clipped inside its letters -->
-<h1 class="sr-only">GIREESH — Artist, Creative, Storyteller. Welcome to my world.</h1>
+<h1 class="sr-only">RONI HALDER — Designer, Creative, Storyteller. Welcome to my world.</h1>
 
-<div class="stage-wrap">
+<div class="stage-wrap" id="top">
   <canvas id="stage" aria-hidden="true"></canvas>
 
   <!-- ------------------------------------------------------------------ -->
@@ -32,8 +45,8 @@
                 vector-effect="non-scaling-stroke"/>
     </svg>
 
-    <a class="hdr__mark" href="#" aria-label="Gireesh, home">
-      <span class="mark-word">GIREESH</span>
+    <a class="hdr__mark" href="#top" aria-label="Roni Halder, home">
+      <span class="mark-word">RONI HALDER</span>
     </a>
 
     <span class="hdr__div" aria-hidden="true"></span>
@@ -44,11 +57,11 @@
 
     <nav class="hdr__nav" aria-label="Primary">
       <ul>
-        <li><a href="#" class="is-active" data-nav>Home</a></li>
-        <li><a href="#" data-nav>Work</a></li>
-        <li><a href="#" data-nav>About</a></li>
-        <li><a href="#" data-nav>Journal</a></li>
-        <li><a href="#" data-nav>Contact</a></li>
+        <li><a href="#top" class="is-active" data-nav>Home</a></li>
+        <li><a href="#universe" data-nav>Universe</a></li>
+        <li><a href="#chrono" data-nav>Journey</a></li>
+        <li><a href="#gallery" data-nav>Work</a></li>
+        <li><a href="#fin" data-nav>Contact</a></li>
       </ul>
     </nav>
 
@@ -57,7 +70,7 @@
       <span class="hdr__pips" aria-hidden="true"><i></i><i></i><i></i></span>
     </div>
 
-    <button class="hdr__burger" id="burger" aria-expanded="false" aria-controls="hdrNavMobile">
+    <button class="hdr__burger" id="burger" aria-expanded="false" aria-controls="menu">
       <span aria-hidden="true"></span><span aria-hidden="true"></span>
       <span class="sr-only">Menu</span>
     </button>
@@ -71,7 +84,7 @@
       <b class="welcome__dots">•••</b>
     </p>
 
-    <p class="chip chip--artist" id="chipArtist"><span>•Artist Gireesh•</span></p>
+    <p class="chip chip--artist" id="chipArtist"><span>•Artist Roni•</span></p>
     <p class="chip chip--legend" id="chipLegend"><span>•Legend•</span></p>
 
     <div class="arrows arrows--l" id="arrowsL"></div>
@@ -82,13 +95,13 @@
   </div>
 
   <!-- ------------------------------------------------------------------ -->
-  <nav class="menu" id="menu" aria-label="Primary, expanded" hidden>
+  <nav class="menu" id="menu" aria-label="Primary navigation" hidden>
     <ul>
-      <li><a href="#" class="is-active" data-nav>Home</a></li>
-      <li><a href="#" data-nav>Work</a></li>
-      <li><a href="#" data-nav>About</a></li>
-      <li><a href="#" data-nav>Journal</a></li>
-      <li><a href="#" data-nav>Contact</a></li>
+      <li><a href="#top" class="is-active" data-nav>Home</a></li>
+      <li><a href="#universe" data-nav>Universe</a></li>
+      <li><a href="#chrono" data-nav>Journey</a></li>
+      <li><a href="#gallery" data-nav>Work</a></li>
+      <li><a href="#fin" data-nav>Contact</a></li>
     </ul>
     <p class="menu__tag">••• Welcome to my world •••</p>
   </nav>
@@ -103,7 +116,7 @@
 
   <noscript>
     <div class="fallback">
-      <p>GIREESH</p>
+      <p>RONI HALDER</p>
       <small>This opening is an animated experience. Please enable JavaScript.</small>
     </div>
   </noscript>
@@ -129,8 +142,8 @@
       <li>Spline</li><li>Claude</li><li>ChatGPT</li><li>Midjourney</li>
     </ul>
     <video id="uniFilm" muted playsinline loop preload="metadata"
-           poster="public/media/universe.jpg" aria-hidden="true">
-      <source src="public/media/universe.mp4" type="video/mp4">
+           poster="media/universe.jpg" aria-hidden="true">
+      <source src="media/universe.mp4" type="video/mp4">
     </video>
     <div class="universe__veil" id="uniVeil" aria-hidden="true"></div>
   </section>
@@ -176,7 +189,7 @@
       <div class="gallery__world">
         <div class="gallery__deck" id="galleryDeck"></div>
         <img class="gallery__person" id="galleryPerson"
-             src="public/projects/person.png" alt="" draggable="false">
+             src="projects/person.png" alt="" draggable="false">
       </div>
 
       <h2 class="g-label g-label--projects" id="galleryTitle">Projects</h2>
@@ -201,7 +214,7 @@
 <!-- ====================================================================== -->
 <footer class="fin" id="fin" aria-label="Closing">
   <div class="fin__pin">
-  <h2 class="sr-only">Gireesh</h2>
+  <h2 class="sr-only">Roni Halder</h2>
 
   <div class="fin__stage1" id="finStage1">
     <canvas id="finBack" aria-hidden="true"></canvas>
@@ -229,13 +242,13 @@
   </figure>
 
   <div class="fin__bar">
-    <a href="#" data-nav>Contact</a>
-    <nav class="fin__soc" aria-label="Social">
-      <a href="#" rel="me">Instagram</a>
-      <a href="#" rel="me">Behance</a>
-      <a href="#" rel="me">LinkedIn</a>
-    </nav>
-    <small class="fin__c">&copy; 2026 Gireesh &mdash; All rights reserved</small>
+    <a href="#fin" data-nav>Contact</a>
+    <p class="fin__soc" aria-label="Social profiles">
+      <span>Instagram</span>
+      <span>Behance</span>
+      <span>LinkedIn</span>
+    </p>
+    <small class="fin__c">&copy; 2026 Roni Halder &mdash; All rights reserved</small>
   </div>
   </div>
 </footer>

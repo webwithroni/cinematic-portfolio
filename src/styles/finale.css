@@ -1,14 +1,14 @@
 /* ==========================================================================
    The finale — the closing shot.
    Deep black + dark red + crimson + cream. The furnace canvas sits behind a
-   giant GIREESH set in real type (Anton, stretched to the reference's
+   giant RONI HALDER set in real type (Anton, stretched to the reference's
    ultra-tall poster proportions, wearing the extracted grunge), the man's
    canvas rides in front of the title, and the editorial captions + the quiet
    functional row hold the edges.
    ========================================================================== */
 
 /* Two frames of one closing scene: the pinned stage holds frame 1 (the
-   GIREESH composition) while the extra scroll room drives frame 2 sliding in
+   RONI HALDER composition) while the extra scroll room drives frame 2 sliding in
    from the left over it. */
 .fin {
   position: relative;
@@ -79,7 +79,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: url('../../public/tex/grain.png') repeat;
+  background: url('/tex/grain.png') repeat;
   background-size: 340px;
   opacity: 0.06;
   mix-blend-mode: overlay;
@@ -215,7 +215,7 @@
 .fin.is-fallback #finBack,
 .fin.is-fallback #finMan { display: none; }
 .fin.is-fallback {
-  background: #000 url('../../public/fin/plate.jpg') center / cover no-repeat;
+  background: #000 url('/fin/plate.jpg') center / cover no-repeat;
 }
 .fin.is-set .f-cap,
 .fin.is-set .fin__bar { opacity: 1; transform: none; filter: none; }
